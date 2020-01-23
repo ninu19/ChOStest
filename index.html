@@ -1,0 +1,29 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="responsivevoice.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<body ng-app="myApp">
+
+<div ng-controller="myCtrl">
+  <p>Click the button to run a function:</p>
+  <button ng-click="myFunc()">OK</button>
+  <button ng-click="pause()">pause</button>
+  <button ng-click="resume()">resume</button>
+  <p>The button has been clicked {{count}} times.</p>
+  <textarea id="text"> play abvdefads</textarea>
+</div>
+
+<script>
+angular.module('myApp', [])
+  .controller('myCtrl', ['$scope', function($scope) {
+    $scope.count = 0;
+    $scope.myFunc = function() {
+      responsiveVoice.speak('Afara este frig si ninge. Toti copii sunt afara se dau cu sania,fac multi oameni din zapada iar eu stau în casa la caldura sobei si beau o ciocolata calda. Tatal meu taie lemnele iar mama ne pregateste masa. Dupa ce mancam stam cu totii în pat si ne uitam la filme de craciun. Eu cu tata si mama mergem afara si ne batem cu bulgari de zapada apoi ne dam cu sania si facem un om de zapada.Dar se pare ca pe jos se pune o ceata care ne acopera vederea.Intram în casa si cu totii suntem obositi.Asa este iarna pe la noi în familie ne jucam si apoi adormim.Iarna este cel mai frumos anotimp .')
+    };
+    $scope.pause = function(){
+    responsiveVoice.pause();
+    }
+    $scope.resume = function(){
+    responsiveVoice.resume();
+    }
+  }]);
