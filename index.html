@@ -15,14 +15,12 @@
 </div>
  
 <script>
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope) {
+
+var app = angular.module("myApp", []);
+ app.controller('myCtrl', function($scope) {
     $scope.firstName = "John";
     
 });
-</script>
-<script>
-var app = angular.module("myApp", []);
 app.directive('readText', function ($rootScope,$interval) {
         return {
             restrict: "A",
