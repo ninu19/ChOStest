@@ -5,15 +5,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body ng-app="myApp">
 
-
- <div read-text="ASJDASDKHAPIDOSAJDOISAUDIDUSA{IODUSAIODUSAIDSAIODUSAIO{DAUDAISOD"  class="btn-group btn-group-spaced-sm btn-group-voice row-vspace-md">
+<div ng-controller="myCtrl">
+ <div read-text="{{firstName}}"  class="btn-group btn-group-spaced-sm btn-group-voice row-vspace-md">
              <button class='start' value='start' type='button'>START</button>
              <button class='stop' value='stop' type='button'>STOP</button>
              <button class='resume' value='resume' type='button'>RESUME</button>
              <button class='pause' value='pause' type='button'>PAUSE</button>
 
 </div>
-
+ </div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstName = "John";
+    
+});
+</script>
 <script>
 var app = angular.module("myApp", []);
 app.directive('readText', function ($rootScope,$interval) {
