@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive("dragWidth", function () {
+angular.module('myApp').directive("dragWidth", function () {
     return {
         // restrict: "A",
         link: function (scope, element) {
