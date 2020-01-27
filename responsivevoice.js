@@ -128,7 +128,7 @@ a.voicecollection=[
 {name:"Paolo Compact",rate:.5},
 {name:"it-IT",rate:.25},
 {name:"Fallback Italian Female",lang:"it",fallbackvoice:!0,service:"g1",gender:"female"},
-{name:"Chrome OS US English",timerSpeed:1},
+{name:"Chrome OS US English",lang:"en-US",fallbackvoice:!0,timerSpeed:0,service:"g1",gender:"female"},
 {name:"Google US English",timerSpeed:1},
 {name:"English United States"},
 {name:"ingl\u00e9s Estados Unidos"},
