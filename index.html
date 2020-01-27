@@ -70,7 +70,7 @@ app.directive('readText', function ($rootScope,$interval) {
                     });
                     text = $("<div></div>").html(text).text();
                     if (sUsrAg.indexOf("CrOS") > -1) {
-                        responsiveVoice.speak(text, "Chrome OS US English", {
+                        responsiveVoice.speak(text, {
                             rate: rateInput.value,
                             onend: function () {
                                 $(".pause").hide();
