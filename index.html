@@ -41,14 +41,11 @@ var app = angular.module("myApp", []);
   
 });
 app.directive('readText', function ($rootScope,$interval) {
-        return {
+         return {
             restrict: "A",
             link: function (scope, elem, attr) {
                 $rootScope.isPause = false;
                 var sBrowser, sUsrAg = navigator.userAgent;
-              if (sUsrAg.indexOf("CrOS") > -1) {
-                     responsiveVoice.setDefaultVoice("Chrome OS US English");
-                   }
                 $(elem).find(".start").click(function () {
                     $rootScope.isPause = false;
                     var rateInput = document.getElementById('rate');
@@ -56,12 +53,12 @@ app.directive('readText', function ($rootScope,$interval) {
                         $(".resume").hide();
                         $(".start").show();
                         $(".stop").hide();
-            
+                    responsiveVoice.cancel();
                     $(this).hide();
                     $(elem).find(".pause").show();
                     $(elem).find(".stop").show();
-                    
-                    
+                    responsiveVoice.speak(" ");
+                    setTimeout(function() {
                     var symbols = [
                         {code:"<[^>]*>",replace:''},
                         {code:"[{()}]",replace:""},
@@ -73,14 +70,27 @@ app.directive('readText', function ($rootScope,$interval) {
                     });
                     text = $("<div></div>").html(text).text();
                     if (sUsrAg.indexOf("CrOS") > -1) {
-                        responsiveVoice.speak(text);
+                        responsiveVoice.speak(text, "Chrome OS US English", {
+                            rate: rateInput.value,
+                            onend: function () {
+                                $(".pause").hide();
+                                $(".resume").hide();
+                                $(".start").show();
+                                $(".stop").hide();
+                            }
+                        });
                     } else {
                         responsiveVoice.speak(text, "US English Female", {
                             rate: rateInput.value,
-                          
+                            onend: function () {
+                                $(".pause").hide();
+                                $(".resume").hide();
+                                $(".start").show();
+                                $(".stop").hide();
+                            }
                         });
                     }
-                    
+                    }, 130);
                     });
 
                 $(elem).find(".stop").click(function () {
@@ -99,7 +109,12 @@ app.directive('readText', function ($rootScope,$interval) {
                         $(this).hide();
                         $(elem).find(".resume").show();
                         
-                                             
+                            var interval = $interval(function(){
+                                if($rootScope.isPause == true){
+                                responsiveVoice.pause();
+                                clearInterval(interval)
+                                }
+                            }, 5000);                      
                 }).hide();
                 
                 $(elem).find(".resume").click(function () {
