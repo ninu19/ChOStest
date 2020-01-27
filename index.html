@@ -49,12 +49,12 @@ app.directive('readText', function ($rootScope,$interval) {
                         $(".resume").hide();
                         $(".start").show();
                         $(".stop").hide();
-                    responsiveVoice.cancel();
+            
                     $(this).hide();
                     $(elem).find(".pause").show();
                     $(elem).find(".stop").show();
-                    responsiveVoice.speak(" ");
-                    setTimeout(function() {
+                    
+                    
                     var symbols = [
                         {code:"<[^>]*>",replace:''},
                         {code:"[{()}]",replace:""},
@@ -86,7 +86,7 @@ app.directive('readText', function ($rootScope,$interval) {
                             }
                         });
                     }
-                    }, 130);
+                    
                     });
 
                 $(elem).find(".stop").click(function () {
@@ -105,12 +105,7 @@ app.directive('readText', function ($rootScope,$interval) {
                         $(this).hide();
                         $(elem).find(".resume").show();
                         
-                            var interval = $interval(function(){
-                                if($rootScope.isPause == true){
-                                responsiveVoice.pause();
-                                clearInterval(interval)
-                                }
-                            }, 5000);                      
+                                             
                 }).hide();
                 
                 $(elem).find(".resume").click(function () {
