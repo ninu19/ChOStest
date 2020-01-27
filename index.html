@@ -20,6 +20,7 @@
                                 </div>
   <button  ng-click="resume()" type='button'>Resume fun</button>
   <button  ng-click="pause()" type='button'>Pause fun</button>
+  <button  ng-click="start()" type='button'>Start fun</button>
 
 </div>
  
@@ -33,6 +34,9 @@ var app = angular.module("myApp", []);
     };
   $scope.pause = function(){
     responsiveVoice.pause()
+    };
+  $scope.start = function(){
+    responsiveVoice.speak($scope.firstName)
     };
   
 });
