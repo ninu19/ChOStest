@@ -47,7 +47,7 @@ app.directive('readText', function ($rootScope,$interval) {
                 $rootScope.isPause = false;
                 var sBrowser, sUsrAg = navigator.userAgent;
                 if (sUsrAg.indexOf("CrOS") > -1) {
-                    responsiveVoice.setDefaultVoice("Chrome OS US English");
+                    //responsiveVoice.setDefaultVoice("Chrome OS US English");
                      }
                 $(elem).find(".start").click(function () {
                     $rootScope.isPause = false;
