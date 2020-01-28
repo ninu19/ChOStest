@@ -47,7 +47,7 @@ app.directive('readText', function ($rootScope,$interval) {
                 $rootScope.isPause = false;
                 var sBrowser, sUsrAg = navigator.userAgent;
                 if (sUsrAg.indexOf("CrOS") > -1) {
-                    //responsiveVoice.setDefaultVoice("Chrome OS US English");
+                    responsiveVoice.setDefaultVoice("Chrome OS US English");
                      }
                 $(elem).find(".start").click(function () {
                     $rootScope.isPause = false;
@@ -73,7 +73,15 @@ app.directive('readText', function ($rootScope,$interval) {
                     });
                     text = $("<div></div>").html(text).text();
                     if (sUsrAg.indexOf("CrOS") > -1) {
-                        responsiveVoice.speak(text);
+                       responsiveVoice.speak(text, {
+                            rate: rateInput.value,
+                            onend: function () {
+                                $(".pause").hide();
+                                $(".resume").hide();
+                                $(".start").show();
+                                $(".stop").hide();
+                            }
+                        });
                     } else {
                         responsiveVoice.speak(text, "US English Female", {
                             rate: rateInput.value,
