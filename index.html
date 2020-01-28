@@ -56,12 +56,12 @@ app.directive('readText', function ($rootScope,$interval) {
                         $(".resume").hide();
                         $(".start").show();
                         $(".stop").hide();
-
+                    responsiveVoice.cancel();
                     $(this).hide();
                     $(elem).find(".pause").show();
                     $(elem).find(".stop").show();
-   
-
+                    responsiveVoice.speak(" ");
+                    setTimeout(function() {
                     var symbols = [
                         {code:"<[^>]*>",replace:''},
                         {code:"[{()}]",replace:""},
@@ -72,8 +72,8 @@ app.directive('readText', function ($rootScope,$interval) {
                         text = text.replace(new RegExp(el.code, 'g'), el.replace);
                     });
                     text = $("<div></div>").html(text).text();
-                    /*if (sUsrAg.indexOf("CrOS") > -1) {
-                       responsiveVoice.speak(text,"US English Female", {
+                   /* if (sUsrAg.indexOf("CrOS") > -1) {
+                        responsiveVoice.speak(text, "Chrome OS US English", {
                             rate: rateInput.value,
                             onend: function () {
                                 $(".pause").hide();
@@ -92,8 +92,8 @@ app.directive('readText', function ($rootScope,$interval) {
                                 $(".stop").hide();
                             }
                         });
-                  // }
-
+                    //}
+                    }, 130);
                     });
 
                 $(elem).find(".stop").click(function () {
