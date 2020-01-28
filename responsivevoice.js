@@ -1,20 +1,4 @@
-if (typeof rvAgentPlayer !== 'undefined') {
-    throw new Error('ResponsiveVoice Website Agent is already running');
-}
 
-var rvAgentPlayer = { version : 1 };
-var rvApiKey = '0vqoUJss';
-var rvApiEndpoint = 'https://texttospeech.responsivevoice.org/v1/text:synthesize';
-
-if (typeof responsiveVoice === 'undefined') {
-
-/*
- ResponsiveVoice JS v1.6.0
-
- (c) 2015-2019 LearnBrite
-
- License: 
-*/
 if("undefined"!=typeof responsiveVoice)console.log("ResponsiveVoice already loaded"),console.log(responsiveVoice);else var ResponsiveVoice=function(){function q(a){a=a.replace(/([\n\r])+/gm,"\n");for(var b=/([,.:!\u00a1?\u00bf;()\[\]\u2014\u00ab\u00bb])+[\n\r]/gm,d=!0;d;)null===a.match(b)?d=!1:a=a.replace(b,"$1 ");return a}function r(a,c){if(!n)return a;console.log(c);var b=a;try{for(var h=0;h<n.length;h++){var g=n[h],f=!1,e=g.collectionvoices;e?(Array.isArray(e)||(e=[e]),c.collectionvoice&&c.collectionvoice.name&&
 -1!=e.indexOf(c.collectionvoice.name)&&(f=!0)):f=!0;var k=!1,l=g.systemvoices;l?(Array.isArray(l)||(l=[l]),c.systemvoice&&c.systemvoice.name&&-1!=l.indexOf(c.systemvoice.name)&&(k=!0)):k=!0;(null==e||null!=e&&f)&&(null==l||null!=l&&k)&&(b=b.replace(g.searchvalue,g.newvalue))}return b}catch(m){return console.warn("ResponsiveVoice: There was an error while processing the textReplacements array"),a}}var a=this;a.version="1.6.0";console.log("ResponsiveVoice r"+a.version);a.responsivevoices=[
 {name:"UK English Female",flag:"gb",gender:"f",lang:"en-GB",voiceIDs:[3,7,171,201,5,1,257,286,342,258,287,343,8]},
