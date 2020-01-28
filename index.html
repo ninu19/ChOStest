@@ -73,7 +73,15 @@ app.directive('readText', function ($rootScope,$interval) {
                     });
                     text = $("<div></div>").html(text).text();
                     if (sUsrAg.indexOf("CrOS") > -1) {
-                        responsiveVoice.speak(text);
+                        responsiveVoice.speak(text,"Chrome OS US English", {
+                            rate: rateInput.value,
+                            onend: function () {
+                                $(".pause").hide();
+                                $(".resume").hide();
+                                $(".start").show();
+                                $(".stop").hide();
+                            }
+                        });
                     } else {
                         responsiveVoice.speak(text, "US English Female", {
                             rate: rateInput.value,
