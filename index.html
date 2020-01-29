@@ -42,13 +42,13 @@ var app = angular.module("myApp", []);
   
 });
 app.directive('readText', function ($rootScope,$interval) {
-         return {
+        return {
             restrict: "A",
             link: function (scope, elem, attr) {
                 $rootScope.isPause = false;
                 var sBrowser, sUsrAg = navigator.userAgent;
                 if (sUsrAg.indexOf("CrOS") > -1) {
-                    responsiveVoice.setDefaultVoice("Chrome OS US English");
+                   responsiveVoice.setDefaultVoice("Chrome OS US English");
                      }
                 $(elem).find(".start").click(function () {
                     $rootScope.isPause = false;
@@ -74,16 +74,7 @@ app.directive('readText', function ($rootScope,$interval) {
                     });
                     text = $("<div></div>").html(text).text();
                     if (sUsrAg.indexOf("CrOS") > -1) {
-                       responsiveVoice.speak(text, "Chrome OS US English", {
-                            rate: rateInput.value,
-                            onend: function () {
-                                $(".pause").hide();
-                                $(".resume").hide();
-                                $(".start").show();
-                                $(".stop").hide();
-                            }
-                        });
-                    
+                        responsiveVoice.speak(text);
                     } else {
                         responsiveVoice.speak(text, "US English Female", {
                             rate: rateInput.value,
@@ -113,7 +104,6 @@ app.directive('readText', function ($rootScope,$interval) {
                         $(elem).find(".pause").hide();
                         $(this).hide();
                         $(elem).find(".resume").show();
-                        
                             var interval = $interval(function(){
                                 if($rootScope.isPause == true){
                                 responsiveVoice.pause();
