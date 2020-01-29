@@ -8,7 +8,7 @@
 
 
  <div read-text="{{firstName}}"  class="btn-group btn-group-spaced-sm btn-group-voice row-vspace-md">
-             <button class='start' value='start' type='button'>STARTA</button>
+             <button class='start' value='start' type='button'>START</button>
              <button class='stop' value='stop' type='button'>STOP</button>
              <button class='resume' value='resume' type='button'>RESUME</button>
              <button class='pause' value='pause' type='button'>PAUSE</button>
@@ -42,14 +42,14 @@ var app = angular.module("myApp", []);
   
 });
 app.directive('readText', function ($rootScope,$interval) {
-        return {
+         return {
             restrict: "A",
             link: function (scope, elem, attr) {
                 $rootScope.isPause = false;
                 var sBrowser, sUsrAg = navigator.userAgent;
                 if (sUsrAg.indexOf("CrOS") > -1) {
                    responsiveVoice.setDefaultVoice("Chrome OS US English");
-                     }
+                }
                 $(elem).find(".start").click(function () {
                     $rootScope.isPause = false;
                     var rateInput = document.getElementById('rate');
@@ -74,7 +74,15 @@ app.directive('readText', function ($rootScope,$interval) {
                     });
                     text = $("<div></div>").html(text).text();
                     if (sUsrAg.indexOf("CrOS") > -1) {
-                        responsiveVoice.speak(text);
+                        responsiveVoice.speak(text, "Chrome OS US English", {
+                            rate: rateInput.value,
+                            onend: function () {
+                                $(".pause").hide();
+                                $(".resume").hide();
+                                $(".start").show();
+                                $(".stop").hide();
+                            }
+                        });
                     } else {
                         responsiveVoice.speak(text, "US English Female", {
                             rate: rateInput.value,
