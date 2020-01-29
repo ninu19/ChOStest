@@ -19,8 +19,8 @@ if("undefined"!=typeof responsiveVoice)console.log("ResponsiveVoice already load
 -1!=e.indexOf(c.collectionvoice.name)&&(f=!0)):f=!0;var k=!1,l=g.systemvoices;l?(Array.isArray(l)||(l=[l]),c.systemvoice&&c.systemvoice.name&&-1!=l.indexOf(c.systemvoice.name)&&(k=!0)):k=!0;(null==e||null!=e&&f)&&(null==l||null!=l&&k)&&(b=b.replace(g.searchvalue,g.newvalue))}return b}catch(m){return console.warn("ResponsiveVoice: There was an error while processing the textReplacements array"),a}}var a=this;a.version="1.6.0";console.log("ResponsiveVoice r"+a.version);a.responsivevoices=[{
 name:"UK English Female",flag:"gb",gender:"f",lang:"en-GB",voiceIDs:[3,7,171,201,5,1,257,286,342,258,287,343,8]},
 {name:"UK English Male",flag:"gb",gender:"m",lang:"en-GB",voiceIDs:[0,277,202,75,4,2,256,285,341,159]},
-{name:"US English Female",flag:"us",gender:"f",lang:"en-US",voiceIDs:[432,433,434,39,40,41,42,383,205,204,43,173,235,283,339,408,44]},
-{name:"Chrome OS US English",flag:"us",gender:"f",lang:"en-US",voiceIDs:[432,433,434,39,40,41,42,383,205,204,43,173,235,283,339,408,44]},
+{name:"US English Female",flag:"us",gender:"f",lang:"en-US",voiceIDs:[433,434,435,40,41,42,43,384,206,205,44,174,236,284,340,409,45]},
+{name:"Chrome OS US English",flag:"us",gender:"f",lang:"en-US",voiceIDs:[433,434,435,39,41,42,43,384,206,205,44,174,236,284,340,409,45]},
 {name:"US English Male",flag:"us",gender:"m",lang:"en-US",voiceIDs:[431,234,282,338,236,284,340,2,4,0,75,195,169]},
 {name:"Arabic Male",flag:"ar",gender:"m",lang:"ar-SA",voiceIDs:[96,
 95,97,196,388]},{name:"Arabic Female",flag:"ar",gender:"f",lang:"ar-SA",voiceIDs:[98]},{name:"Armenian Male",flag:"hy",gender:"f",lang:"hy-AM",voiceIDs:[99]},{name:"Australian Female",flag:"au",gender:"f",lang:"en-AU",voiceIDs:[415,276,201,87,5,88]},{name:"Australian Male",flag:"au",gender:"m",lang:"en-AU",voiceIDs:[86,386]},{name:"Bangla Bangladesh Female",flag:"bd",gender:"f",lang:"bn-BD",voiceIDs:[435]},{name:"Bangla Bangladesh Male",flag:"bd",gender:"m",lang:"bn-BD",voiceIDs:[410,436]},{name:"Bangla India Female",
