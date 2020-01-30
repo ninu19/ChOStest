@@ -27,6 +27,22 @@
 
 </div>
  
+  <div read-text-passages="{{firstName}}"  class="btn-group btn-group-spaced-sm btn-group-voice row-vspace-md">----------Passage-----
+             <button class='start' value='start' type='button'>STARTa</button>
+             <button class='stop' value='stop' type='button'>STOP</button>
+             <button class='resume' value='resume' type='button'>RESUME</button>
+             <button class='pause' value='pause' type='button'>PAUSE</button>
+  <div class="form-group" style="padding: 12px 0;">
+                                    <span class="running-icon"></span>
+                                    <label for='rate'>Use the slider to change voice speed</label>
+                                          <input type='range' min='0.1' max='2.0' step='0.1' name='rate' id='rate' value='0.8'/>
+                                    <small class="text-muted pull-left">Slower</small>
+                                    <small class="text-muted pull-right">Faster</small>
+                                </div>
+  
+
+</div>
+ 
 <script>
 
 var app = angular.module("myApp", []);
@@ -114,6 +130,138 @@ app.directive('readText', function ($rootScope,$interval) {
                                 }
                             }, 5000);
                 }).hide();
+            },
+        };
+    })
+ 
+ app.directive('readTextPassagesButton', function ($rootScope,$interval) {
+        return {
+            restrict: "A",
+            link: function (scope, elem, attr) {
+                $rootScope.isPause = false;
+                var sBrowser, sUsrAg = navigator.userAgent;
+                $rootScope.textSelectedByTouch="";
+                var rateInput = document.getElementById('rate');
+                function getSelectionText() {
+                    var text = "";
+                    if (window.getSelection) {
+                        text = window.getSelection().toString();
+                    } else if (document.selection && document.selection.type != "Control") {
+                        text = document.selection.createRange().text;
+                    }
+                    if(text=='' && $rootScope.textSelectedByTouch!=''){
+                        text=$rootScope.textSelectedByTouch;
+                    }
+
+                    var symbols = [
+                        {code:"<[^>]*>",replace:''},
+                        {code:"[{()}]",replace:""},
+                    ];
+                    if (text.length == 0 || text == ""){
+                        text = attr["readTextPassagesButton"];
+                        symbols.forEach(function(el) {
+                            text = text.replace(new RegExp(el.code, 'g'), el.replace);
+                        });
+                        text = $("<div></div>").html(text).text();
+                    }
+                    return text;
+                }
+                $(document).ready(function (){
+                    $(elem).find(".start").click(function () {
+                        $rootScope.isPause = false;
+                        $(".pause").hide();
+                        $(".resume").hide();
+                        $(".start").show();
+                        $(".stop").hide();
+                        $(this).hide();
+                        $(elem).find(".pause").show();
+                        $(elem).find(".stop").show();
+                        if(rs.readAloud == 1){
+                            if (sUsrAg.indexOf("Firefox") > -1) {
+                                sBrowser = "Mozilla Firefox";
+                                if (sBrowser = "Mozilla Firefox")
+                                {
+                                    responsiveVoice.cancel();
+                                    responsiveVoice.speak(" ");
+                                    setTimeout(function() {
+                                    responsiveVoice.cancel();
+                                    responsiveVoice.speak(getSelectionText(),"US English Female",{
+                                        onstart:function(){
+                                        $(elem).find(".pause").show();
+                                        $(elem).find(".stop").show();
+                                        $(elem).find(".start").hide();
+                                        },
+                                        rate:rateInput.value,
+                                        onend:function(){
+                                        $rootScope.textSelectedByTouch="";
+                                        $(".pause").hide();
+                                        $(".resume").hide();
+                                        $(".start").show();
+                                        $(".stop").hide();
+                                        }
+                                    });
+                                    }, 200);
+                                }
+                            }
+                        else{
+                            responsiveVoice.cancel();
+                            responsiveVoice.speak(getSelectionText(),"US English Female",{
+                                onstart:function(){
+                                $(elem).find(".pause").show();
+                                $(elem).find(".stop").show();
+                                $(elem).find(".start").hide();
+                                },
+                                rate:rateInput.value,
+                                onend:function(){
+                                $rootScope.textSelectedByTouch="";
+                                $(".pause").hide();
+                                $(".resume").hide();
+                                $(".start").show();
+                                $(".stop").hide();
+                                }
+                            });
+                          }
+                        }
+                        else{
+                            responsiveVoice.cancel();
+                        }
+                    });
+
+                    $(elem).on('touchend', function(ev) {
+                        $rootScope.textSelectedByTouch=window.getSelection().toString();
+                    });
+
+                    $(elem).find(".stop").click(function () {
+                        $rootScope.isPause = false;
+                        $rootScope.textSelectedByTouch="";
+                        responsiveVoice.cancel();
+                        $(this).hide();
+                        $(elem).find(".pause").hide();
+                        $(elem).find(".resume").hide();
+                        $(elem).find(".start").show();
+                    }).hide();
+
+                    $(elem).find(".resume").click(function () {
+                        $rootScope.isPause = false;
+                        $(this).hide();
+                        $(elem).find(".pause").show();
+                        responsiveVoice.resume();
+                    }).hide();
+
+                    $(elem).find(".pause").click(function () {
+                            $rootScope.isPause = true;
+                            $(elem).find(".pause").hide();
+                            responsiveVoice.pause();
+                            $(this).hide();
+                            $(elem).find(".resume").show();
+                            var interval = $interval(function(){
+                                if($rootScope.isPause == true){
+                                responsiveVoice.pause();
+                                clearInterval(interval)
+                                }
+                            }, 5000);
+                    }).hide();
+                });
             },
         };
     })
