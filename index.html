@@ -1,7 +1,8 @@
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <!--<script src="responsivevoice1.5.1.js"></script>-->
- <script src="responsivevoice1.6.0.js"></script>
+<!--<script src="responsivevoice1.6.0.js"></script>-->
+ <script src="https://code.responsivevoice.org/responsivevoice.js?key=aTvp6hfm"></script>
 <script src="directives.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body ng-app="myApp" ng-controller="myCtrl">
@@ -48,7 +49,7 @@ app.directive('readText', function ($rootScope,$interval) {
                 $rootScope.isPause = false;
                 var sBrowser, sUsrAg = navigator.userAgent;
                 if (sUsrAg.indexOf("CrOS") > -1) {
-                   responsiveVoice.setDefaultVoice("Chrome OS US English");
+                 //  responsiveVoice.setDefaultVoice("Chrome OS US English");
                 }
                 $(elem).find(".start").click(function () {
                     $rootScope.isPause = false;
@@ -73,7 +74,7 @@ app.directive('readText', function ($rootScope,$interval) {
                         text = text.replace(new RegExp(el.code, 'g'), el.replace);
                     });
                     text = $("<div></div>").html(text).text();
-                    if (sUsrAg.indexOf("CrOS") > -1) {
+                /*    if (sUsrAg.indexOf("CrOS") > -1) {
                         responsiveVoice.speak(text, "Chrome OS US English", {
                             rate: rateInput.value,
                             onend: function () {
@@ -83,7 +84,7 @@ app.directive('readText', function ($rootScope,$interval) {
                                 $(".stop").hide();
                             }
                         });
-                    } else {
+                    } else {*/
                         responsiveVoice.speak(text, "US English Female", {
                             rate: rateInput.value,
                             onend: function () {
@@ -93,7 +94,7 @@ app.directive('readText', function ($rootScope,$interval) {
                                 $(".stop").hide();
                             }
                         });
-                    }
+                   // }
                     }, 130);
                     });
 
