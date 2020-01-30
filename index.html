@@ -139,6 +139,7 @@ app.directive('readText', function ($rootScope,$interval) {
             restrict: "A",
             link: function (scope, elem, attr) {
                 $rootScope.isPause = false;
+                var rs.readAloud = 1;
                 var sBrowser, sUsrAg = navigator.userAgent;
                 $rootScope.textSelectedByTouch="";
                 var rateInput = document.getElementById('rate');
