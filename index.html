@@ -1,5 +1,4 @@
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <!--<script src="responsivevoice1.5.1.js"></script>-->
 <!--<script src="responsivevoice1.6.0.js"></script>-->
  <script src="https://code.responsivevoice.org/responsivevoice.js?key=aTvp6hfm"></script>
@@ -9,7 +8,7 @@
 
 
  <div read-text="{{firstName}}"  class="btn-group btn-group-spaced-sm btn-group-voice row-vspace-md">
-             <button class='start' value='start' type='button'>START</button>
+             <button class='start' value='start' type='button'>STARTa</button>
              <button class='stop' value='stop' type='button'>STOP</button>
              <button class='resume' value='resume' type='button'>RESUME</button>
              <button class='pause' value='pause' type='button'>PAUSE</button>
@@ -43,14 +42,10 @@ var app = angular.module("myApp", []);
   
 });
 app.directive('readText', function ($rootScope,$interval) {
-         return {
+       return {
             restrict: "A",
             link: function (scope, elem, attr) {
                 $rootScope.isPause = false;
-                var sBrowser, sUsrAg = navigator.userAgent;
-                if (sUsrAg.indexOf("CrOS") > -1) {
-                 //  responsiveVoice.setDefaultVoice("Chrome OS US English");
-                }
                 $(elem).find(".start").click(function () {
                     $rootScope.isPause = false;
                     var rateInput = document.getElementById('rate');
@@ -74,29 +69,18 @@ app.directive('readText', function ($rootScope,$interval) {
                         text = text.replace(new RegExp(el.code, 'g'), el.replace);
                     });
                     text = $("<div></div>").html(text).text();
-                /*    if (sUsrAg.indexOf("CrOS") > -1) {
-                        responsiveVoice.speak(text, "Chrome OS US English", {
-                            rate: rateInput.value,
-                            onend: function () {
-                                $(".pause").hide();
-                                $(".resume").hide();
-                                $(".start").show();
-                                $(".stop").hide();
-                            }
-                        });
-                    } else {*/
-                        responsiveVoice.speak(text, "US English Female", {
-                            rate: rateInput.value,
-                            onend: function () {
-                                $(".pause").hide();
-                                $(".resume").hide();
-                                $(".start").show();
-                                $(".stop").hide();
-                            }
-                        });
-                   // }
-                    }, 130);
+
+
+
+                    responsiveVoice.speak(text,"US English Female",{rate:rateInput.value,onend:function(){
+                        $(".pause").hide();
+                        $(".resume").hide();
+                        $(".start").show();
+                        $(".stop").hide();
+                     }
                     });
+                }, 130);
+                });
 
                 $(elem).find(".stop").click(function () {
                     $rootScope.isPause = false;
@@ -107,6 +91,14 @@ app.directive('readText', function ($rootScope,$interval) {
                     $(elem).find(".start").show();
                     $(elem).find(".rate").hide();
                 }).hide();
+
+                $(elem).find(".resume").click(function () {
+                    $rootScope.isPause = false;
+                    $(this).hide();
+                    $(elem).find(".pause").show();
+                    responsiveVoice.resume();
+                }).hide();
+
                 $(elem).find(".pause").click(function () {
                     $rootScope.isPause = true;
                     responsiveVoice.pause();
@@ -118,17 +110,8 @@ app.directive('readText', function ($rootScope,$interval) {
                                 responsiveVoice.pause();
                                 clearInterval(interval)
                                 }
-                            }, 5000);                      
+                            }, 5000);
                 }).hide();
-                
-                $(elem).find(".resume").click(function () {
-                    $rootScope.isPause = false;
-                    $(this).hide();
-                    $(elem).find(".pause").show();
-                    responsiveVoice.resume();
-                }).hide();
-
-                
             },
         };
     })
